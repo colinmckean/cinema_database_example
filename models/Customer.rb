@@ -13,7 +13,7 @@ class Customer
     sql = ("INSERT 
             INTO customers (customer_name,funds)
             VALUES ('#{@customer_name}','#{@funds}') 
-            RETURNING *;")
-    SqlRunner.run(sql)
+            RETURNING id;")
+    SqlRunner.run(sql).first['id'].to_i
   end
 end

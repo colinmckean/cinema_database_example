@@ -19,6 +19,7 @@ class Film
 
   def self.delete_all()
   end
+  
   def self.all()
     sql = ("SELECT * 
             FROM films")
