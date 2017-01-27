@@ -1,8 +1,9 @@
 require_relative '../db/SqlRunner'
 
 class Customer
-  attr_reader :customer_name, :funds
+  attr_reader :id, :customer_name, :funds
   def initialize(options)
+    @id = options['id'].to_i
     @customer_name = options['customer_name']
     @funds = options['funds']
     #might want to change funds to big decimal
