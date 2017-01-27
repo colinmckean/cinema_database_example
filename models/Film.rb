@@ -6,23 +6,28 @@ class Film
     @title = options['title']
     @price = options['price']
   end
-#CRUD actions (create, read, update, delete) customers, films and tickets.
+  #CRUD actions (create, read, update, delete) customers, films and tickets.
   def save()
     sql = ("INSERT
-               INTO films (title,price)
-               VALUES ('#{@title}','#{@price}')
-               RETURNING id;")
+     INTO films (title,price)
+     VALUES ('#{@title}','#{@price}')
+     RETURNING id;")
     @id = SqlRunner.run(sql).first['id'].to_i
   end
+
   def update()
-    
-  end
-  def delete()
-  sql = "DELETE
-         FROM films
-         WHERE id=#{@id}"
+    sql = ("UPDATE films
+      SET (title, price) =
+      ('#{@title}', '#{@price}')
+      WHERE id = #{@id}")
     SqlRunner.run(sql)
-      
+  end
+
+  def delete()
+    sql = "DELETE
+    FROM films
+    WHERE id=#{@id}"
+    SqlRunner.run(sql)
   end
 
   def self.delete_all()
@@ -32,7 +37,7 @@ class Film
 
   def self.all()
     sql = ("SELECT * 
-            FROM films")
+      FROM films")
     SqlRunner.run(sql).map{ |film| Film.new(film) }
   end
 end
