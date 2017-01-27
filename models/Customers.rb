@@ -12,7 +12,7 @@ class Customers
   def save()
     sql = ("INSERT 
             INTO customers (customer_name,funds)
-            VALUES ('Colin','5'); 
+            VALUES ('#{@customer_name}','#{@funds}') 
             RETURNING *;")
     SqlRunner.run(sql)
   end
