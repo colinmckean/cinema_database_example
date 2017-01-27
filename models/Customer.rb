@@ -18,15 +18,17 @@ class Customer
     SqlRunner.run(sql).first['id'].to_i
   end
   def update()
-    
+
   end
 
   def self.delete_all()
+    sql = ("DELETE FROM customers;")
+    SqlRunner.run(sql)
   end
   
   def self.all()
     sql = ("SELECT * 
-            FROM customers")
+            FROM customers;")
     SqlRunner.run(sql).map { |customer| Customer.new(customer)  }
   end
 end
