@@ -20,7 +20,7 @@ class Film
       SET (title, price) =
       ('#{@title}', '#{@price}')
       WHERE id = #{@id}")
-    @id = SqlRunner.run(sql).first['id'].to_i
+    SqlRunner.run(sql)
   end
 
   def delete()
