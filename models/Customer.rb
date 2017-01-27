@@ -17,4 +17,16 @@ class Customer
             RETURNING id;")
     SqlRunner.run(sql).first['id'].to_i
   end
+  def update()
+    
+  end
+
+  def self.delete_all()
+  end
+  
+  def self.all()
+    sql = ("SELECT * 
+            FROM customers")
+    SqlRunner.run(sql).map { |customer| Customer.new(customer)  }
+  end
 end
