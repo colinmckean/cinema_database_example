@@ -1,5 +1,6 @@
 class Film
-  attr_reader :id, :title, :price
+  attr_reader :id
+  attr_accessor :title, :price
   def initialize(options)
     @id = options['id'].to_i
     @title = options['title']
@@ -11,10 +12,17 @@ class Film
                INTO films (title,price)
                VALUES ('#{@title}','#{@price}')
                RETURNING id;")
-    SqlRunner.run(sql).first['id'].to_i
+    @id = SqlRunner.run(sql).first['id'].to_i
   end
   def update()
     
+  end
+  def delete()
+  sql = "DELETE
+         FROM films
+         WHERE id=#{@id}"
+    SqlRunner.run(sql)
+      
   end
 
   def self.delete_all()
