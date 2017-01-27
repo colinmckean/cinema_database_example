@@ -1,6 +1,6 @@
 require_relative '../db/SqlRunner'
 
-class Customers
+class Customer
   attr_reader :customer_name, :funds
   def initialize(options)
     @customer_name = options['customer_name']
