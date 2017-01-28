@@ -40,6 +40,17 @@ class Customer
            WHERE customer_id = #{@id};"
     SqlRunner.run(sql).count
   end
+  
+  def tickets_held
+    sql = "SELECT f.title, c.customer_name
+           FROM films f
+           INNER JOIN tickets t
+           ON f.id = t.film_id
+           INNER JOIN customers c
+           ON c.id = t.customer_id
+           WHERE c.id = #{@id};"
+    SqlRunner.run(sql).map { |ticket_holder| TicketHolder.new(ticket_holder) }
+  end
 
   def self.delete_all()
     sql = ("DELETE FROM customers;")
