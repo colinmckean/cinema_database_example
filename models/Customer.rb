@@ -1,13 +1,13 @@
 require_relative '../db/SqlRunner'
 
 class Customer
-
+  
   attr_reader :id
   attr_accessor :customer_name, :funds
   def initialize(options)
     @id = options['id'].to_i
     @customer_name = options['customer_name']
-    @funds = options['funds']
+    @funds = options['funds'].to_f
     #might want to change funds to big decimal
     #http://stackoverflow.com/questions/1019939/what-is-the-best-method-of-handling-currency-money
   end
@@ -23,7 +23,7 @@ class Customer
   def update()
     sql = ("UPDATE customers
             SET (customer_name, funds) =
-            ('#{@customer_name}', '#{@funds}')
+            ('#{@customer_name}', #{@funds})
             WHERE id = #{@id};")
             SqlRunner.run(sql)
   end
