@@ -40,8 +40,7 @@ class Customer
            WHERE customer_id = #{@id};"
     SqlRunner.run(sql).count
   end
-  
-  def tickets_held
+  def ticket_held
     sql = "SELECT f.title, c.customer_name
            FROM films f
            INNER JOIN tickets t
