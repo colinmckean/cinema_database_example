@@ -12,6 +12,7 @@ class Ticket
             VALUES ('#{@customer_id}', '#{@film_id}')
             RETURNING id;")
     @id = SqlRunner.run(sql).first['id'].to_i
+
   end
   def update()
     sql = ("UPDATE tickets
@@ -39,5 +40,10 @@ class Ticket
     sql = "SELECT * 
            FROM tickets"
     SqlRunner.run(sql).map { |ticket| Ticket.new(ticket)  }
+  end
+
+  def sell_ticket(customer, film)
+    customer.funds -= film.price
+    customer.update()
   end
 end
