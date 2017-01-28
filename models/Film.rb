@@ -30,6 +30,13 @@ class Film
     SqlRunner.run(sql)
   end
 
+
+  def seats_taken
+    sql = "SELECT * FROM tickets
+           WHERE film_id = #{@id};"
+    SqlRunner.run(sql).count
+  end
+
   def self.delete_all()
     sql = ("DELETE FROM films;")
     SqlRunner.run(sql)
