@@ -4,7 +4,7 @@ class Film
   def initialize(options)
     @id = options['id'].to_i
     @title = options['title']
-    @price = options['price']
+    @price = options["price"].to_f
   end
   #CRUD actions (create, read, update, delete) customers, films and tickets.
   def save()
@@ -18,7 +18,7 @@ class Film
   def update()
     sql = ("UPDATE films
       SET (title, price) =
-      ('#{@title}', '#{@price}')
+      ('#{@title}', #{@price})
       WHERE id = #{@id}")
     SqlRunner.run(sql)
   end
