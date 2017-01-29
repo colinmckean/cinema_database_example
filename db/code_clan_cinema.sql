@@ -11,7 +11,8 @@ CREATE TABLE customers(
 CREATE TABLE films(
   id SERIAL4 primary key,
   title VARCHAR(255),
-  price MONEY
+  price MONEY,
+  tickets_avail INT2
   );
 
 CREATE TABLE tickets(
