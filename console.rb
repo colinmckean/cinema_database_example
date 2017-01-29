@@ -4,7 +4,9 @@ require_relative './models/Ticket'
 require_relative './models/Customer'
 require_relative './models/TicketHolder'
 #examples are comments at bottom, use lc_monetary="en_GB" in psql to set currancy to £;
-
+# SELECT * FROM customers;
+# SELECT * FROM tickets;
+# SELECT * FROM films;
 customers_array = [
   customer_1 = Customer.new({
     'customer_name' => 'ARLENE',
@@ -231,15 +233,16 @@ ticket_28 = Ticket.new({
   'show_time' => show_time_c})
 ]
 
+
 #################################
 ##### SELL GODFATHER TICKETS ####
 #################################
 
-   ticket_1.sell_ticket
-   ticket_4.sell_ticket
-   ticket_7.sell_ticket
-   ticket_12.sell_ticket
-   ticket_21.sell_ticket
+   # ticket_1.sell_ticket
+   # ticket_4.sell_ticket
+   # ticket_7.sell_ticket
+   # ticket_12.sell_ticket
+   # ticket_21.sell_ticket
    
 # # try selling one more. ticket_18
 
