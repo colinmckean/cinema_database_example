@@ -51,6 +51,12 @@ class Customer
     SqlRunner.run(sql).map { |ticket_holder| TicketHolder.new(ticket_holder) }
   end
 
+  def self.find_by_id(id_to_find)
+    sql = ("SELECT * FROM customers
+           WHERE id = #{id_to_find};")
+    SqlRunner.run(sql).first
+  end
+
   def self.delete_all()
     sql = ("DELETE FROM customers;")
     SqlRunner.run(sql)
