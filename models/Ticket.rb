@@ -64,6 +64,9 @@ class Ticket
   def sell_ticket()
     customer_funds = Customer.find_by_id(@customer_id)['funds']
     film_price = Film.find_by_id(@film_id)['price']
+    tickets_avail = Film.find_by_id(@film_id)['tickets_avail'].to_i
+    
+    if tickets_avail > 0
     customer_funds[0] = ''
     film_price[0] = ''
     customer_funds = customer_funds.to_f
@@ -77,7 +80,6 @@ class Ticket
             (#{result})
             WHERE id = #{@customer_id};"
       SqlRunner.run(sql)
-      self.save
       tickets_to_update = Film.find_by_id(@film_id)['tickets_avail'].to_i
       tickets_to_update -= 1
   sql = "UPDATE films
@@ -90,11 +92,12 @@ SqlRunner.run(sql)
   #   @customer_id = customer.id
   #   @film_id = film.id
   #   @show_time = self.show_time
-  #   self.save
+    self.save
   #   customer.funds -= film.price
   #   film.tickets_avail -= 1
   #   customer.update()
   #   film.update()
   # end
+end
   end
 end

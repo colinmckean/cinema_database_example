@@ -39,7 +39,7 @@ class Film
   end
 
   def ticket_holders
-    sql = "SELECT c.customer_name, f.title
+    sql = "SELECT c.customer_name, f.title, t.show_time
            FROM customers c
            INNER JOIN tickets t
            ON c.id = t.customer_id
@@ -48,7 +48,7 @@ class Film
            WHERE f.id = #{@id};"
     SqlRunner.run(sql).map { |ticket_holder| TicketHolder.new(ticket_holder) }
   end
-  
+
   def self.find_by_id(id_to_find)
     sql = ("SELECT * FROM films
            WHERE id = #{id_to_find};")
