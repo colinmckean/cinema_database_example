@@ -61,8 +61,40 @@ class Ticket
     SqlRunner.run(sql).map { |ticket| Ticket.new(ticket)  }
   end
 
-  def sell_ticket(customer, film)
-    customer.funds -= film.price
-    customer.update()
+  def sell_ticket()
+    customer_funds = Customer.find_by_id(@customer_id)['funds']
+    film_price = Film.find_by_id(@film_id)['price']
+    customer_funds[0] = ''
+    film_price[0] = ''
+    customer_funds = customer_funds.to_f
+    film_price = film_price.to_f
+    result = customer_funds - film_price
+    result.round(2)
+  customer_to_find = Customer.find_by_id(@customer_id)
+  customer_to_find['funds'] = result
+  sql = "UPDATE customers
+            SET (funds) =
+            (#{result})
+            WHERE id = #{@customer_id};"
+      SqlRunner.run(sql)
+      self.save
+      tickets_to_update = Film.find_by_id(@film_id)['tickets_avail'].to_i
+      tickets_to_update -= 1
+  sql = "UPDATE films
+      SET (tickets_avail) =
+      (#{tickets_to_update})
+      WHERE id = #{@film_id};"
+SqlRunner.run(sql)
+  # customer_to_find.update()
+  #   if film.tickets_avail > 0
+  #   @customer_id = customer.id
+  #   @film_id = film.id
+  #   @show_time = self.show_time
+  #   self.save
+  #   customer.funds -= film.price
+  #   film.tickets_avail -= 1
+  #   customer.update()
+  #   film.update()
+  # end
   end
 end
